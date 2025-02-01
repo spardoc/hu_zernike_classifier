@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">hu_zernike_classifier</string>
+    <string-array name="spinner_items">
+        <item>Momentos de Hu</item>
+        <item>Momentos de Zernike</item>
+    </string-array>
+</resources>
