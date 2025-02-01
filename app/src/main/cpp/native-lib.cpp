@@ -177,13 +177,12 @@ vector<double> calculateZernikeMoments(Mat &binaryImage) {
                 for (int x = 0; x < binaryImage.cols; x++) {
                     if (binaryImage.at<uchar>(y, x) > 0) {
                         double normX = (x - cx) / normFactor;
-                        double normY = (cy - y) / normFactor; // (cy - y) mantiene la orientación
+                        double normY = (cy - y) / normFactor; // (cy - y)
                         double r = sqrt(normX * normX + normY * normY);
                         double theta = atan2(normY, normX);
 
                         if (r <= 1.0) {
                             double R = radialPolynomial(n, m, r);
-                            // Calcular el término Zernike: R * exp(i * m * theta)
                             complex<double> Z(R * cos(m * theta), R * sin(m * theta));
                             moment += Z * (binaryImage.at<uchar>(y, x) / 255.0);
                         }
@@ -209,9 +208,7 @@ std::vector<ShapeData> loadDatasetCSV(const std::string &csvFilePath) {
     }
 
     std::string line;
-    // Leer y descartar el encabezado (si lo tiene)
     if (std::getline(file, line)) {
-        // Aquí podrías procesar el header si es necesario.
     }
     // Number of Hu and Zernike Moments
     const int huCount = 7;
@@ -299,9 +296,6 @@ Java_com_example_hu_1zernike_1classifier_MainActivity_classifyShapeHu(
     // HU Features
     vector<double> features = calculateHuMoments(binary);
 
-    // (Opcional) Imprimir también el vector de características calculado
-    logVector(features, "HuClassifier", "Features calculadas: ");
-
     // Load Dataset Moments
     vector<ShapeData> dataset = loadDatasetCSV(gDatasetPath);
 
@@ -327,9 +321,6 @@ Java_com_example_hu_1zernike_1classifier_MainActivity_classifyShapeZernike(
 
     // Zernike Features
     vector<double> features = calculateZernikeMoments(binary);
-
-    // (Opcional) Imprimir también el vector de características calculado
-    logVector(features, "ZernikeClassifier", "Features calculadas: ");
 
     // Load Dataset Moments
     vector<ShapeData> dataset = loadDatasetCSV(gDatasetPath);

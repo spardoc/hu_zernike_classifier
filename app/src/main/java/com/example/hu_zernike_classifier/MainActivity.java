@@ -135,12 +135,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Función para redimensionar la imagen manteniendo la relación de aspecto
     private Bitmap resizeBitmap(Bitmap original, int targetWidth, int targetHeight) {
         int width = original.getWidth();
         int height = original.getHeight();
 
-        // Mantener la relación de aspecto de la imagen original
         float aspectRatio = (float) width / height;
         if (width > height) {
             targetHeight = (int) (targetWidth / aspectRatio);
